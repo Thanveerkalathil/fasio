@@ -287,9 +287,9 @@ module.exports = {
         
         {
           $group:{_id:null,
-            total:{$sum:{$multiply:['$quantity','$products.price']}}       
-          }
-        }
+            total:{$sum:{$multiply:['$quantity',{$convert:{input:'$product.price',to:'int'}}]}}
+        }}
+       
         
       ])
       .toArray();

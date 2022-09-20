@@ -18,14 +18,15 @@ router.get("/", async function (req, res, next) {
   const user = req.session.user;
   let cartCount = null;
   let cartProducts;
+  let total;
   if (req.session.user) {
     cartCount = await usersHelpers.getCartCount(req.session.user._id);
     cartProducts = await usersHelpers.getCartProducts(req.session.user._id);
+    total =await usersHelpers.getTotalAmount(req.session.user._id)
   }
-  console.log(cartCount+'dfjdsklfdskfdksln vcbv');
-
   productHelpers.getAllproducts().then((products) => {
     res.render("users/index", {
+      total,
       cartProducts,
       cartCount,
       products,
@@ -149,8 +150,9 @@ router.get("/products-details/:id", async (req, res) => {
 router.get("/cart", varifyLogin, async (req, res) => {
   const user= req.session.user;
   let products = await usersHelpers.getCartProducts(req.session.user._id);
-
+  let total =await usersHelpers.getTotalAmount(req.session.user._id)
   res.render("users/shoping-cart", {
+    total,
     products,
     user,
     layout: "users-layout",
@@ -167,9 +169,9 @@ router.get("/add-to-cart/:id", (req, res) => {
 });
 
 router.post("/change-product-quantity",(req, res, next) => {
-  console.log("asdfsdfdsfsdfsdfsdfsdfsdf");
   console.log(req.body);
-  usersHelpers.changeProductQuantity(req.body).then((response) => {
+  usersHelpers.changeProductQuantity(req.body).then(async(response) => {
+    response.currentTotal= await usersHelpers.getTotalAmount(req.body.user)
     console.log(response);
     res.json(response)
   });
