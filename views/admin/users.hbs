@@ -1,0 +1,35 @@
+<div class='main-panel '>
+    <div class='content-wrapper '>
+
+
+        <div class='row mt-3'>
+            <div class='col-12 grid-margin'>
+
+                <div class='card'>
+                    <div class='card-body'>
+                        <h4 class='card-title'>Order Status</h4>
+                        <div class='table-responsive'>
+                            <table class='table'>
+                                <thead>
+                                    <tr>
+
+                                        <th> No. </th>
+                                        <th> Name </th>
+                                        <th> Email </th>
+                                        <th> Phone Number </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each users}}
+                                    <tr>
+                                        <td> 1 </td>
+                                        <td> {{this.username}} </td>
+                                        <td> {{this.email}} </td>
+                                        <td> {{this.phoneNumber}} </td>
+                                        <td>
+                                        <a class='btn btn-outline-danger' href="/admin/delete-users/{{this._id}}"
+                                            onclick="return confirm('Are you want to delete {{this.username}}?')">delete</a>
+                                        </td>
+                                    </tr>
+                                    {{/each}}

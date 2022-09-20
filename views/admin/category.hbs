@@ -1,0 +1,42 @@
+<div class='main-panel '>
+	<div class='content-wrapper '>
+		<div class="row">
+			<a class="btn btn-success ml-auto mr-5 font-weight-bold" href="/admin/add-category">+Add Category</a>
+
+		</div>
+
+		<div class='row mt-3'>
+			<div class='col-12 grid-margin'>
+
+				<div class='card'>
+					<div class='card-body'>
+						<h4 class='card-title'>Order Status</h4>
+						<div class='table-responsive'>
+							<table class='table'>
+								<thead>
+									<tr>
+										<th> No. </th>
+										<th> Category Name </th>
+										{{!-- <th> Type </th> --}}
+										<th> images </th>
+									</tr>
+								</thead>
+								<tbody>
+									{{#each category}}
+									<tr>
+
+										<td> 1 </td>
+										<td> {{this.category}} </td>
+										{{!-- <td> {{this.type}} </td> --}}
+										<td><img style="width:50px;height:50px" src="/upload/{{this.image.filename}}"
+												alt=""></td>
+										<td>
+
+										</td>
+										<td>
+											<a href="/admin/edit-category/{{this._id}}" class='btn btn-outline-primary' >Edit</a>
+											<a class='btn btn-outline-danger' href="/admin/delete-category/{{this._id}}" onclick="return confirm('Are you want to delete {{this.category}}?')" >delete</a>
+										</td>
+
+									</tr>
+									{{/each}}

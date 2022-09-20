@@ -1,0 +1,196 @@
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="container tm-mt-big tm-mb-big">
+      <div class="row">
+        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+          <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+            <div class="row">
+              <div class="col-12">
+                <h2 class="tm-block-title d-inline-block">Edit Product</h2>
+              </div>
+            </div>
+            <div class="row tm-edit-product-row">
+              <form
+                action="/admin/edit-products/{{product._id}}"
+                enctype="multipart/form-data"
+                method="post"
+                class="tm-edit-product-form d-flex"
+              >
+                <div class="col-xl-6 col-lg-6 col-md-12">
+
+                  <div class="form-group mb-3">
+                    <label for="name">Brand
+                    </label>
+                    <input
+                      id="name"
+                      name="brand"
+                      type="text"
+                      class="form-control validate"
+                      required=""
+                      placeholder="Enter Brand Name"
+                      value="{{product.brand}}"
+                    />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="product name">Product
+                    </label>
+                    <input
+                      id="name"
+                      name="productName"
+                      type="text"
+                      class="form-control validate"
+                      required=""
+                      placeholder="Enter Product Name"
+                      value="{{product.productName}}"
+                    />
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label for="">Type</label>
+                    <select
+                      class="custom-select tm-select-accounts category"
+                      name="type"
+                      id="type"
+                      onchange="changeCategories();"
+                    >
+                      <option
+                        value="{{product.type}}"
+                        selected
+                        disabled
+                      >{{product.type}}</option>
+                      <option value="men">MEN</option>
+                      <option value="women">WOMEN</option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="">Category</label>
+
+                    <select
+                      class="custom-select tm-select-accounts type"
+                      name="category"
+                      id="category"
+                    >
+                      <option
+                        value="{{product.category}}"
+                        selected
+                        disabled
+                      >{{product.category}}</option>
+                      {{#each category}}
+                        <option
+                          value="{{this.category}}"
+                        >{{this.category}}</option>
+                      {{/each}}
+                    </select>
+
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="description">Description</label>
+                    <textarea
+                      class="form-control validate"
+                      name="description"
+                      rows="3"
+                      required=""
+                    >{{product.description}}</textarea>
+                  </div>
+                  <label for="stock">Stock of Product
+                  </label>
+                  <div class="row">
+
+                    {{#each product.stocks}}
+               
+                      <div class="form-group mb-3 col-xs-12 col-sm-2">
+                             <label class="text-uppercase" for="">{{this.size}}</label>
+                        <input
+                          id="stock"
+                          name="{{this.size}}"
+                          type="number"
+                          class="form-control validate text-uppercase"
+                          required=""
+                          value="{{this.stock}}"
+                          placeholder="{{this.size}}"
+                        />
+                      </div>
+                    {{/each}}
+
+                    <div class="form-group mb-3 col-md-12">
+                      <label for="stock">Price
+                      </label>
+
+                      <input
+                        id="stock"
+                        name="price"
+                        type="number"
+                        class="form-control validate"
+                        required=""
+                        placeholder="Enter Price"
+                        value="{{product.price}}"
+                      />
+                    </div>
+                    <div class="mt-3 mb-3 col-md-12 mx-auto">
+                      {{#each product.images}}
+                        <div class="d-md-flex">
+                          <img
+                            class="p-2 mx-auto col-md-6"
+                            src="/upload/{{this.filename}}"
+                            alt="product preview"
+                            id="image{{this._id}}"
+                            style="width: 150px; height: 150px;;"
+                          />
+                          <div class="custom-file mt-3 mb-3 col-md-6 d-flex">
+                            <input
+                              id="fileInput{{this._id}}"
+                              type="file"
+                              style="display:none;"
+                              name="files"
+                              onchange="changeImage(event,'{{this._id}}')"
+                              multiple
+                            />
+                            <input
+                              type="button"
+                              class="btn btn-primary btn-block mx-auto"
+                              value="UPLOAD IMAGE"
+                              onclick="document.getElementById('fileInput{{this._id}}').click();"
+                            />
+                          </div>
+                        </div>
+
+                      {{/each}}
+
+                    </div>
+                    
+
+                      <div class="col-md-12">
+                        <button
+                          type="submit"
+                          class="btn btn-primary btn-block text-uppercase col-md-12"
+                        >Add Product Now</button>
+                      </div>
+                    
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"
+></script>
+<script>
+  const invalidChars = ["-", "e", "+", "E"];
+  $("input[type='number']").on("keydown", function (e) { if
+  (invalidChars.includes(e.key)) { e.preventDefault(); } })
+</script>
+<script>
+  function changeImage(event,imageId){
+  document.getElementById(`image${imageId}`).src=URL.createObjectURL(event.target.files[0])
+  }
+</script>

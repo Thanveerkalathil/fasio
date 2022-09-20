@@ -1,0 +1,80 @@
+<!-- Product -->
+<div class="bg0 m-t-60 p-b-140">
+	<div class="container">
+		<div class="flex-w flex-sb-m p-b-52">
+
+			<!-- Search product -->
+			<div class="dis-none panel-search w-full p-t-10 p-b-15">
+				<div class="bor8 dis-flex p-l-15">
+					<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+						<i class="zmdi zmdi-search"></i>
+					</button>
+
+					<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product"
+						placeholder="Search">
+				</div>
+			</div>
+
+			<!-- Filter -->
+			
+		</div>
+
+		<div class="row isotope-grid">
+			{{#each products}}
+			
+			<div class="col-sm-6 col-md-4 col-lg-2 p-b-35 isotope-item women">
+				<!-- Block2 -->
+				<div class="block2">
+					<div class="block2-pic hov-img0">
+						<a href="/products-details/{{this._id}}">
+						<img src="/upload/{{this.images.[0].filename}}" alt="IMG-PRODUCT">	
+						</a>
+									
+					</div>
+
+					<div class="block2-txt flex-w flex-t p-t-14">
+						<div class="block2-txt-child1 flex-col-l ">
+							<a href="/products-details/{{this._id}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 text-dark font-weight-bold">
+								{{this.brand}}
+							</a>
+
+							<a href="/products-details/{{this._id}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+								{{this.productName}}
+							</a>
+
+							<span class="stext-105 cl3">
+								<i class="fa-solid fa-indian-rupee-sign mr-1"></i>{{this.price}}
+							</span>
+						</div>
+
+						<div class="block2-txt-child2 flex-r p-t-3">
+							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+								<img class="icon-heart1 dis-block trans-04" src="/users/images/icons/icon-heart-01.png"
+									alt="ICON">
+								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="/users/images/icons/icon-heart-02.png"
+									alt="ICON">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			{{/each}}
+		</div>
+	</div>
+
+	<!-- Load more -->
+	<div class="flex-c-m flex-w w-full p-t-45">
+		<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+			Load More
+		</a>
+	</div>
+</div>
+</div>
+
+<!-- Back to top -->
+<div class="btn-back-to-top" id="myBtn">
+	<span class="symbol-btn-back-to-top">
+		<i class="zmdi zmdi-chevron-up"></i>
+	</span>
+</div>
+
