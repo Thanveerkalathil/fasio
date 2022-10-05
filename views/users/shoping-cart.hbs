@@ -43,16 +43,16 @@
 
 								<td class="column-4">
 									<div class="wrap-num-product flex-w m-l-auto m-r-0">
-										<button class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
-											onclick="changeQuantity('{{this._id}}','{{this.products._id}}',{{user._id}},-1)">
+										<button type="button" class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
+											onclick="changeQuantity('{{this._id}}','{{this.products._id}}','{{../user._id}}',-1)">
 											<i class="fs-16 zmdi zmdi-minus"></i>
 										</button>
 
 										<span class="mtext-104 cl3 txt-center num-product p-t-10" type="number"
-											id="{{this.products._id}}" name="num-product1">{{this.quantity}}</span>
+											id="{{this.products._id}}">{{this.quantity}}</span>
 
-										<button class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m "
-											onclick="changeQuantity('{{this._id}}','{{this.products._id}}',{{user._id}},1)">
+										<button type="button" class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m "
+											onclick="changeQuantity('{{this._id}}','{{this.products._id}}','{{../user._id}}', 1)">
 											<i class="fs-16 zmdi zmdi-plus"></i>
 										</button>
 									</div>
@@ -98,8 +98,8 @@
 						</div>
 
 						<div class="size-209">
-							<span class="mtext-110 cl2">
-								{{total}}
+							<span class="mtext-110 cl2" id="stotal">
+								{{totalValue}}
 							</span>
 						</div>
 					</div>
@@ -116,15 +116,15 @@
 
 						<div class="size-209 p-t-1">
 							<h5><i class="fa-solid fa-indian-rupee-sign mr-1"></i>
-							<span class="mtext-110 cl2" id="total" >
-								{{total}}
-							</span>
+								<span class="mtext-110 cl2" id="total">
+									{{totalValue}}
+								</span>
 							</h5>
-							
+
 						</div>
 					</div>
 
-					<a href="/checkout" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 ">
+					<a href="/place-order" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 ">
 						Proceed to Checkout
 					</a>
 				</div>
@@ -132,32 +132,35 @@
 		</div>
 	</div>
 </form>
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-	function changeQuantity(cartId, productId, count,userId) {
+	function changeQuantity(cartId, productId, userId, count) {
+	
+
 		let quantity = parseInt(document.getElementById(productId).innerHTML)
 		count = parseInt(count)
 		$.ajax({
+			method: 'post',
 			url: '/change-product-quantity',
 			data: {
-				user:userId,
 				cart: cartId,
 				product: productId,
 				count: count,
-				quantity: quantity
+				user: userId,
+				quantity
+
 			},
-			method: 'post',
 			success: (response) => {
 				if (response.removeProduct) {
 					alert('product Removed from Cart')
 					location.reload()
 				} else {
+					console.log(response)
 					document.getElementById(productId).innerHTML = quantity + count
-					document.getElementById(total).innerHTML = 	response.currentTotal
+					document.getElementById("total").innerHTML = response.total
+					document.getElementById("stotal").innerHTML = response.total
 				}
 			}
 		})
-
 	}
 </script>

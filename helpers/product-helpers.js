@@ -1,7 +1,7 @@
 const collection = require("../config/collection");
 const db = require("../config/connection");
 const { ObjectId } = require("mongodb");
-const { resolve, reject } = require("promise");
+
 
 module.exports = {
   addProduct: (product, images) => {

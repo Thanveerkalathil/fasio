@@ -6,8 +6,7 @@ module.exports = {
   adminLogin: (adminData) => {
     let loginStatus = false;
     let response = {};
-    return new Promise(async (resolve, reject) => {
-      
+    return new Promise(async (resolve, reject) => {    
       try {
         let admin = await db
           .get()

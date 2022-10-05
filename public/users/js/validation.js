@@ -2,7 +2,7 @@ $("#signup-form").validate({
   errorClass: "jqueryValidationError",
   rules: {
     username: {
-      required: true,
+      required: tr0ue,
       minlength: 4,
       maxlength:25
     },
