@@ -135,9 +135,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 	function changeQuantity(cartId, productId, userId, count) {
-	
-
-		let quantity = parseInt(document.getElementById(productId).innerHTML)
+	let quantity = parseInt(document.getElementById(productId).innerHTML)
 		count = parseInt(count)
 		$.ajax({
 			method: 'post',

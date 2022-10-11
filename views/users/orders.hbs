@@ -1,0 +1,32 @@
+<div class="container p-t-100 mb-5 justify-content-center">
+    <h3 class="mb-3 text-center text-primary font-weight-bold">Your orders</h3>
+    <table class="table table-borderless table-responsive">
+        <thead>
+            <tr>
+                <th scope="col">OrderID &amp; Date</th>
+                <th scope="col">Address</th>
+                <th scope="col">Total amount</th>
+                <th scope="col">Payment</th>
+                <th scope="col">Order status</th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        {{#each orders}}
+        <tbody>
+            <tr>
+                <td class="text-uppercase">ID :{{this._id}}<br>Date:{{this.date}}</td>
+                <td>{{this.DeliveryDetails.name}} <br> {{this.DeliveryDetails.address}}<br>
+                    {{this.DeliveryDetails.district}},{{this.DeliveryDetails.town}} <br>
+                    {{this.DeliveryDetails.state}}, {{this.DeliveryDetails.pincode}} <br>
+                    Email : {{this.DeliveryDetails.email}}<br>
+                    Phone : {{this.DeliveryDetails.mobile}}
+                </td>
+                <td>Rs.{{this.totalAmount}}</td>
+                <td>{{this.paymentMothed}}</td>
+                <td>{{this.status}}</td>
+                <td><a href="/view-order-products/{{this._id}}" class="btn btn-primary">View</a></td>
+            </tr>             
+        </tbody>
+        {{/each}}
+    </table>
+</div>

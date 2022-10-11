@@ -1,0 +1,26 @@
+<div class="container m-t-150 m-b-60">
+
+    <div class="row">
+        {{#each products}}
+        <div class="card d-flex media flex-column flex-sm-row m-l-50 m-b-50" style="width: 500px;">
+
+            <div class="card-body">
+                <h3 class="card-title text-dark font-weight-bold">{{this.product.productName}}</h3>
+                <h6 class=" font-weight-bold">Brand:{{this.product.brand}}</h6>
+                <h6 class=" font-weight-bold">Category:{{this.product.category}}</h6>
+                <p>Type:{{this.product.type}}</p>
+                <p>Quantity:{{this.quantity}}</p>
+                <p>Size:</p>
+                <h3 class="card-title font-weight-bold">Rs.{{this.product.price}}</h3>
+            </div>
+
+            <img class="align-self-center img-fluid" src="/upload/{{this.product.images.[0].filename}}" width="150"
+                height="150" alt="IMG">
+        </div>
+        {{/each}}
+
+
+
+    </div>
+    <h2>Rs.{{totalValue}}</h2>
+</div>
